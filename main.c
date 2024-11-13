@@ -43,7 +43,7 @@ void quicksort1(int arr[], int left, int right)//小到大
 	quicksort1(arr, left, i - 1);
 	quicksort1(arr, i + 1, right);
 }
-//第二种，遍排序遍找
+//第二种，边排序边找
 int quicksort2(int arr[], int left, int right,int find)//小到大
 {
 	int key = arr[left];
@@ -93,7 +93,7 @@ int main()
 	clock_t start, end;
 	double cpu_time_used;
 	//正确性测试：
-	printf("正确性测试：\n");
+	printf("正确性测试：\n\n");
 	int arr1[] = { 12, 3, 5, 7, 19, 8, 4 ,20,1,2,40};
 	int arr2[] = { 12, 3, 5, 7, 19, 8, 4 ,20,1,2,40 };
 	int size = sizeof(arr1) / sizeof(arr1[0]);
@@ -102,20 +102,22 @@ int main()
 	start = clock();
 	quicksort1(arr1, 0, size-1);
 	end = clock();
-	printf("%d\n", arr1[find - 1]);
+	printf("第一种，全排序后再找出第find小的数:\n");
+	printf("Answer = %d\n", arr1[find - 1]);
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 	printf("Time used = %f\n", cpu_time_used);
 	//法2
 	start = clock();
 	int result = quicksort2(arr2, 0, size - 1, find);
 	end = clock();
-	printf("%d\n", result);
+	printf("第二种，边排序边找:\n");
+	printf("Answer = %d\n", result);
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-	printf("Time used = %f\n", cpu_time_used);
+	printf("Time used = %f\n\n", cpu_time_used);
 
 
 	//性能比较
-	printf("性能测试：\n");
+	printf("性能测试：\n\n");
 	int random1[100000], random2[100000];
 	for (int i = 0; i < 100000; i++) 
 	{
@@ -125,14 +127,16 @@ int main()
 	start = clock();
 	quicksort1(random1, 0, 99999);
 	end = clock();
-	printf("%d\n", random1[find - 1]);
+	printf("第一种，全排序后再找出第find小的数:\n");
+	printf("Answer = %d\n", random1[find - 1]);
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 	printf("Time used = %f\n", cpu_time_used);
 	//法2
 	start = clock();
 	result = quicksort2(random2, 0, 99999, find);
     end = clock();
-	printf("%d\n", result);
+	printf("第二种，边排序边找:\n");
+	printf("Answer = %d\n", result);
 	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 	printf("Time used = %f\n", cpu_time_used);
 
